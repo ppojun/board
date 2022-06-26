@@ -1,0 +1,65 @@
+### REST CLIENT 변수 세팅
+@local=http://localhost:3000
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpzaG9uZyIsImlhdCI6MTY1NDc2MTA0MCwiZXhwIjoxNjU0ODQ3NDQwfQ.tHQybZu4bv91RRyTsj-vasbSfZTT6TZurT4SagCihnw
+
+### 1. 회원가입
+POST {{local}}/user/signup
+Content-Type: application/json
+
+{
+    "username": "jshong2",
+    "password": "123456"
+}
+
+### 2. 로그인 > JWT토큰 발급
+POST {{local}}/user/signin
+Content-Type: application/json
+
+{
+    "username": "jshong",
+    "password": "123456"
+}
+
+### 3. JWT토큰 인증 테스트
+POST {{local}}/user/test
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 4. 게시글 작성
+POST {{local}}/boards
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title":"TEST TITLE",
+    "description":"TEST description"
+}
+
+### 5. 모든 게시글 검색
+GET {{local}}/boards
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 6. 게시글 ID로 게시글 검색
+GET {{local}}/boards/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 7. 게시글 업데이트
+PATCH  {{local}}/boards/2/status
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "status":"private"
+}
+
+### 8. 게시글 삭제
+DELETE {{local}}/boards/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+
+
